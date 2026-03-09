@@ -10,10 +10,10 @@ import java.rmi.registry.Registry;
 
 public class Daemon {
 
-    private static final int PORT = 5000;
-    private static final String SHARED_FOLDER = "shared";
-
     public static void main(String[] args) {
+
+        int PORT = Integer.parseInt(args[0]);
+        String SHARED_FOLDER = args[1];
 
         try {
 

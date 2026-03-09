@@ -20,32 +20,46 @@ public class ClientHandler extends Thread {
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
-            String filename = in.readUTF();
-            long start = in.readLong();
-            long end = in.readLong();
+            String command = in.readUTF();
 
-            File file = new File(folder + File.separator + filename);
+            if (command.equals("SIZE")) {
 
-            RandomAccessFile raf = new RandomAccessFile(file, "r");
+                String filename = in.readUTF();
 
-            raf.seek(start);
+                File file = new File(folder + File.separator + filename);
 
-            byte[] buffer = new byte[4096];
-            long bytesToSend = end - start;
+                out.writeLong(file.length());
 
-            while (bytesToSend > 0) {
+            } else if (command.equals("GET")) {
 
-                int read = raf.read(buffer, 0, (int) Math.min(buffer.length, bytesToSend));
+                String filename = in.readUTF();
+                long start = in.readLong();
+                long end = in.readLong();
 
-                if (read == -1)
-                    break;
+                File file = new File(folder + File.separator + filename);
 
-                out.write(buffer, 0, read);
+                RandomAccessFile raf = new RandomAccessFile(file, "r");
 
-                bytesToSend -= read;
+                raf.seek(start);
+
+                byte[] buffer = new byte[4096];
+                long bytesToSend = end - start;
+
+                while (bytesToSend > 0) {
+
+                    int read = raf.read(buffer, 0, (int)Math.min(buffer.length, bytesToSend));
+
+                    if (read == -1)
+                        break;
+
+                    out.write(buffer, 0, read);
+
+                    bytesToSend -= read;
+                }
+
+                raf.close();
             }
 
-            raf.close();
             socket.close();
 
         } catch (Exception e) {
