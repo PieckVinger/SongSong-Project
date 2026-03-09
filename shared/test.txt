@@ -1,0 +1,17 @@
+Code cho Bato:
+javascript:(function(){
+    document.querySelectorAll('.page-img, [name=image-item] img, [data-name=image-item] img').forEach(image => {
+        let url = new URL(image.src);
+        url.host = 'n' + url.host.slice(1);
+        image.src = url.href;
+    })
+;})()
+
+Code cho Mangapark:
+javascript:(function(){
+ document.querySelectorAll('[data-name=image-item] img').forEach(image => {
+ let url = new URL(image.src);
+ url.host = 's03.mpubn.org';
+ image.src = url.href;
+ })
+;})()
