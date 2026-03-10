@@ -6,7 +6,8 @@ java -cp out directory.Directory
 
 - Computer Parallel:
 java -cp out daemon.Daemon 5000 shared1
-java -cp out daemon.Daemon 5000 shared2
+java -cp out daemon.Daemon 5001 shared2
+java -cp out daemon.Daemon 5002 shared3
 ...
 
 - Computer to download:

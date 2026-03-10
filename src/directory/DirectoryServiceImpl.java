@@ -30,7 +30,7 @@ public class DirectoryServiceImpl extends UnicastRemoteObject implements Directo
             return true;
 
         } catch (Exception e) {
-
+            System.out.println("Error in file directory/DirectoryServiceImpl.java");
             return false;
 
         }
@@ -62,7 +62,12 @@ public class DirectoryServiceImpl extends UnicastRemoteObject implements Directo
             }
         }
 
-        return new ArrayList<>(clients);
+        List<String> result = new ArrayList<>(clients);
+
+        Collections.shuffle(result);
+
+        return result;
+
     }
 
     public synchronized void removeClient(String clientAddress) throws RemoteException {

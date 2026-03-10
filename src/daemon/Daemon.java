@@ -56,6 +56,7 @@ public class Daemon {
             }
 
         } catch (Exception e) {
+            System.out.println("Error in file daemon/Daemon.java");
             e.printStackTrace();
         }
     }

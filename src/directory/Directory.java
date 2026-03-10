@@ -18,6 +18,7 @@ public class Directory {
             System.out.println("Directory RMI Server started");
 
         } catch (Exception e) {
+            System.out.println("Error in file directory/Directory.java");
             e.printStackTrace();
         }
 

@@ -63,6 +63,7 @@ public class ClientHandler extends Thread {
             socket.close();
 
         } catch (Exception e) {
+            System.out.println("Error in file daemon/ClientHandler.java");
             e.printStackTrace();
         }
     }

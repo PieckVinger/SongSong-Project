@@ -66,6 +66,8 @@ public class DownloadWorker extends Thread {
             System.out.println("Fragment " + start + " - " + end + " downloaded from " + host + ":" + port);
 
         } catch (Exception e) {
+            System.out.println("Error in file download/DownloadWorker.java");
+
             failed = true;
 
             System.out.println("Source failed: " + host + ":" + port);
