@@ -32,6 +32,7 @@ public class Download {
             }
 
             System.out.println("Sources: " + clients);
+            System.out.println("Number of sources: " + clients.size());
 
             String[] first = clients.get(0).split(":");
 
@@ -53,13 +54,16 @@ public class Download {
             System.out.println("File size: " + fileSize);
 
             int numSources = clients.size();
-
             long fragmentSize = fileSize / numSources;
+            System.out.println("Fragment size: " + fragmentSize + " bytes");
 
             RandomAccessFile output = new RandomAccessFile("download_" + filename, "rw");
             output.setLength(fileSize);
 
             DownloadWorker[] workers = new DownloadWorker[numSources];
+
+            // START TIMER
+            long startTime = System.currentTimeMillis();
 
             for (int i = 0; i < numSources; i++) {
 
@@ -83,9 +87,31 @@ public class Download {
                 w.join();
             }
 
+            // check if any worker failed
+            boolean failureDetected = false;
+
+            for (DownloadWorker w : workers) {
+                if (w.failed) {
+                    failureDetected = true;
+                    break;
+                }
+            }
+
+            // STOP TIMER
+            long endTime = System.currentTimeMillis();
+
             output.close();
 
-            System.out.println("Download completed");
+            System.out.println("Download finished (some fragments may fail if sources disconnected)");
+
+            long totalTime = endTime - startTime;
+
+            System.out.println("Download time: " + totalTime + " ms");
+            System.out.println("Download time: " + (totalTime / 1000.0) + " seconds");
+
+            if (!failureDetected) {
+                System.out.println("No disconnection detected during download.");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

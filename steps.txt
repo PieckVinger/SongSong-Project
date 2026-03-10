@@ -1,0 +1,13 @@
+- Compile .java into class:
+javac -d out src\common\*.java src\directory\*.java src\daemon\*.java src\download\*.java
+
+- Computer Server (IP):
+java -cp out directory.Directory
+
+- Computer Parallel:
+java -cp out daemon.Daemon 5000 shared1
+java -cp out daemon.Daemon 5000 shared2
+...
+
+- Computer to download:
+java -cp out download.Download movie.mp4

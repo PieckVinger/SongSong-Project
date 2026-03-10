@@ -12,6 +12,8 @@ public class DownloadWorker extends Thread {
     private long end;
     private RandomAccessFile output;
 
+    public boolean failed = false;
+
     public DownloadWorker(String host, int port, String filename,
                           long start, long end, RandomAccessFile output) {
 
@@ -61,10 +63,14 @@ public class DownloadWorker extends Thread {
 
             socket.close();
 
-            System.out.println("Downloaded fragment " + start + " - " + end);
+            System.out.println("Fragment " + start + " - " + end + " downloaded from " + host + ":" + port);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            failed = true;
+
+            System.out.println("Source failed: " + host + ":" + port);
+            System.out.println("Fragment " + start + " - " + end + " not downloaded");
+
         }
     }
 }
