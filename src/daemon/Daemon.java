@@ -1,7 +1,6 @@
 package daemon;
 
 import common.DirectoryService;
-
 import java.io.File;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -18,7 +17,7 @@ public class Daemon {
         try {
 
             // connect to Directory RMI
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry("192.168.1.25", 1099);
             DirectoryService directory = (DirectoryService) registry.lookup("DirectoryService");
 
             String clientAddress = java.net.InetAddress.getLocalHost().getHostAddress();

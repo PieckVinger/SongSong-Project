@@ -1,7 +1,6 @@
 package download;
 
 import common.DirectoryService;
-
 import java.io.RandomAccessFile;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -21,7 +20,7 @@ public class Download {
             String filename = args[0];
 
             // connect to directory
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry("192.168.1.25", 1099);
             DirectoryService directory =
                     (DirectoryService) registry.lookup("DirectoryService");
 
