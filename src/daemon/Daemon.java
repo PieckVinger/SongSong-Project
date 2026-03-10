@@ -17,7 +17,7 @@ public class Daemon {
         try {
 
             // connect to Directory RMI
-            Registry registry = LocateRegistry.getRegistry("10.0.6.139", 1099);
+            Registry registry = LocateRegistry.getRegistry("10.0.6.16", 1099);
             DirectoryService directory = (DirectoryService) registry.lookup("DirectoryService");
 
             String clientAddress = java.net.InetAddress.getLocalHost().getHostAddress();
